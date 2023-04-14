@@ -14,6 +14,17 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddControllers();
 
+builder.Services.AddCors(x => x.AddPolicy("EnableCors", builder =>
+{
+    builder.SetIsOriginAllowedToAllowWildcardSubdomains()
+            .AllowAnyOrigin()
+            //.WithOrigins("https://codestack.com")
+            .AllowAnyMethod()
+            //.WithMethods("PATCH", "DELETE", "GET", "HEADER")
+            .AllowAnyHeader();
+    //.WithHeaders("X-Token", "content-type")
+}));
+
 //Repositories
 builder.Services.AddScoped<IVehiculoRepository,VehiculoRepository>();
 builder.Services.AddScoped<IRepuestoRepository, RepuestoRepository>();
