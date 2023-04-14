@@ -35,6 +35,9 @@ namespace TallerMecanicoDiWork.Modules
         {
             PresupuestoDao presupuesto = await _presupuestoRepository.GetPresupuestoByIdVehiculo(id);
 
+            if (presupuesto == null)
+                throw new Exception("No existe presupuesto para ese id de vehículo, verificar");
+
             presupuesto.Desperfectos = await _desperfectoModule.GetAllDesperfectosByIdPresupuesto(presupuesto.Id);
 
             return presupuesto;
